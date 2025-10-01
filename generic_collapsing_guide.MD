@@ -33,6 +33,15 @@ where
 
 2- RUN COLLAPSE
 -----------------------------
+
+Use the method '.collapse_model' to obtained a collapsed version of the original 'model'.
+
     base_model = propagator.collapse_model()
+
+You can check the number of parameters of this new model with the command:
+
     num_params_base = sum(p.numel() for p in base_model.parameters())
+
+The level of reduction is calculated by:
+    
     per_reduction = num_params_base/num_params

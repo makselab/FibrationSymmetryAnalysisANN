@@ -42,7 +42,7 @@ The output will be saved as a Metta experiment with the name 'base_name':
 
 More information about this script is inside the functions/scripts.
 
-STEP 3: TEST 1 - RUN RANDOM ABLATION AND RE-TRAINING
+STEP 3: TEST 1 - RUN RANDOM ABLATION MODEL AND RE-TRAINING
 ------------------------------
 
 This script applies a random ablation to the original default model trained at epoch 'epoch_idx'. That is, it takes the default model trained 

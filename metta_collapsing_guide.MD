@@ -45,6 +45,7 @@ More information about this script is inside the functions/scripts.
 STEP 3: TEST 1 - RUN RANDOM ABLATION MODEL AND RE-TRAINING
 ------------------------------
 
+This script compares the fibration collapse to a random null model of ablation.
 This script applies a random ablation to the original default model trained at epoch 'epoch_idx'. That is, it takes the default model trained 
 at epoch 'epoch_idx' and ablates the model at random to the size of the collapse model, while keeping the weights of the trained default model.
 
@@ -75,6 +76,7 @@ More information about this script can be found inside the functions/scripts.
 STEP 4: TEST 2 - RUN SMALL RANDOM MODEL FROM SCRATCH
 ------------------------------
 
+This script compares the fibration collapse to a small random null model trained from scratch.
 This script runs the ablation model from scratch by randomly initializing all the weights and retraining. It differs from STEP 3 in that the size remains the same, but all weights are now randomized, and training proceeds from scratch.
 
 You have to define a new agent in the  './agent/src/metta/agent/component_policies/'; e.g, the file 'fast_small.py' contains the dimensions of the layers of the small random model. The dimensions should be obtained from the ablation model in STEP 3.

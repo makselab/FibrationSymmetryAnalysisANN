@@ -3,12 +3,12 @@ FIBRATION SYMMETRIES IN METTA AGENTS: STEP-BY-STEP GUIDE
 
 This guide explains how to use the fibration-based model collapsing features 
 built into Metta agents to compress neural network layers and compare performance 
-before and after compression. You'll run training sessions and visualize 
+before and after compression and perform validation against random models. You'll run training sessions and visualize 
 the effects of collapsing based on fibration symmetries.
 
 STEP 1: RUN BASELINE TRAINING
 -----------------------------
-Run the original training using commands of Metta. For example,
+Run the original training using Metta's commands. For example,
 
     ./tools/run.py experiments.recipes.arena_basic_easy_shaped.train --args run='exp_name' --overrides policy_architecture.name='fast' trainer.evaluation.evaluate_interval=0 trainer.checkpoint.checkpoint_interval=10 trainer.checkpoint.wandb_checkpoint_interval=10 trainer.evaluation.replay_dir=‘exp_name’ trainer.evaluation.skip_git_check=true
 

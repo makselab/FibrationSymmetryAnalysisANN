@@ -73,48 +73,27 @@ Use the interface in WANDB for compare metrics and results.
 FOLDER STRUCTURE EXAMPLE
 -------------------------
 
-train_dir/
-├── exp_name/                    # Original model (1st step)
-│   ├── config.json             
-│   └── exp_name/
-│       └── checkpoints/        
-│           ├── exp_name__eXX__sSS__tTT__sc0.pt
-│           └── ...
-│
-├── base_name/                  # Collapsed model (2nd step)
-│   ├── config.json
-│   └── base_name/
-│       └── checkpoints/
-│           └── ...
-│
-├── ablation_name/              # Ablation model (3rd step)
-│   ├── config.json
-│   └── ablation_name/
-│       └── checkpoints/
-│           └── ...
-└── ...
-
-train_dir/
-├── exp_name/                    # Experimento principal
-│   ├── config.json             # Configuración del experimento
-│   └── exp_name/
-│       └── checkpoints/        # Checkpoints guardados
-│           ├── exp_name__eXX__sSS__tTT__sc0.pt
-│           └── ...
-│
-├── base_name/                  # Línea base o modelo de referencia
-│   ├── config.json
-│   └── base_name/
-│       └── checkpoints/
-│           └── ...
-│
-├── ablation_name/              # Estudio de ablación
-│   ├── config.json
-│   └── ablation_name/
-│       └── checkpoints/
-│           └── ...
-└── ...
-
+    train_dir/
+    ├── exp_name/                    # Original model (1st step)
+    │   ├── config.json             
+    │   └── exp_name/
+    │       └── checkpoints/        
+    │           ├── exp_name__eXX__sSS__tTT__sc0.pt
+    │           └── ...
+    │
+    ├── base_name/                  # Collapsed model (2nd step)
+    │   ├── config.json
+    │   └── base_name/
+    │       └── checkpoints/
+    │           └── ...
+    │
+    ├── ablation_name/              # Ablation model (3rd step)
+    │   ├── config.json
+    │   └── ablation_name/
+    │       └── checkpoints/
+    │           └── ...
+    └── ...
+    
 
 DISCLAIMER
 ----------

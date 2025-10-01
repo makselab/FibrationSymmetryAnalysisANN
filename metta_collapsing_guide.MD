@@ -90,7 +90,7 @@ This code reproduces the results explained in STEP 5 and shown in the file './va
 STEP 5: VALIDATION RESULTS (VISUALIZE AND COMPARE RESULTS BETWEEN ORIGINAL MODEL, COLLAPSED MODEL, ABLATION, AND SMALL MODELS)
 ------------------------------
 
-Steps 1 to 4  should reproduce the results in the file './validation.pdf'.
+Steps 1 to 4  should reproduce the results in the file './validation.pdf' [pdf file](validation.pdf).
 
 Step 1. The green curve represents the original model (default) trained up to 15G agent steps (50k training time).
 

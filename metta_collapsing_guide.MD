@@ -6,7 +6,7 @@ built into Metta agents to compress neural network layers and compare performanc
 before and after compression and perform validation against random models. You'll run training sessions and visualize 
 the effects of collapsing based on fibration symmetries.
 
-STEP 1: RUN BASELINE TRAINING
+STEP 1: RUN DEFAULT TRAINING MODEL
 -----------------------------
 Run the original training using Metta's commands. For example,
 
@@ -21,16 +21,16 @@ This command:
 STEP 2: RUN COLLAPSE AND RE-TRAINING
 ------------------------------
 
-Run a second training session with the collapse mechanism enabled:
+Run a second session with the collapse mechanism enabled:
 
     bash ./kcore.sh
 
-Set up the next parameters:
+Set up the following parameters to collapse the original default model:
 
 - exp_name (str).                            Name of the model to collapse
 - epoch_idx (int).                           Epoch of training when you want to collapse
 - linear_thr, cnn_thr, 
-  lstm_thr, critic_thr (floats 0-2)          Threshold for the fibration calculations
+  lstm_thr, critic_thr (floats 0-2)          Threshold for the fibration calculations. Threshold defines how much to collapse. thr=0 means no collapse. thr=2 maximum collapse into one node 
                                             (default = 0.7, 0.5, 1.0, 0.8)
 
 This code automatically creates a collapsed version of the model and retrains it.

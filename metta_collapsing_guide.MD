@@ -120,8 +120,13 @@ FOLDER STRUCTURE EXAMPLE
     │   └── ablation_name/
     │       └── checkpoints/
     │           └── ...
+    │
+    ├── ablation_scracth_name/      # Ablation model from scratch (4th step)
+    │   ├── config.json
+    │   └── ablation_scracth_name/
+    │       └── checkpoints/
+    │           └── ...
     └── ...
-
 
 DISCLAIMER
 ----------

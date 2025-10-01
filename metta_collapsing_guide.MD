@@ -21,6 +21,8 @@ This command:
 STEP 2: RUN COLLAPSE AND RE-TRAINING
 ------------------------------
 
+This code automatically creates a collapsed version of the model and retrains it.
+
 Run a second session with the collapse mechanism enabled:
 
     bash ./kcore.sh
@@ -33,7 +35,7 @@ Set up the following parameters to collapse the original default model:
   lstm_thr, critic_thr (floats 0-2)          Threshold for the fibration calculations. Threshold defines how much to collapse. thr=0 means no collapse. thr=2 maximum collapse into one node 
                                             (default = 0.7, 0.5, 1.0, 0.8)
 
-This code automatically creates a collapsed version of the model and retrains it.
+
 The output will be saved as a Metta experiment with the name 'base_name':
 
     exp_name_epoch_epoch_idx_base_linear_thr_cnn_thr_lstm_thr_critic_thr
@@ -43,11 +45,19 @@ More information about this script is inside the functions/scripts.
 STEP 3: TEST 1 - RUN RANDOM ABLATION AND RE-TRAINING
 ------------------------------
 
+This script applies a random ablation to the original default model trained at epoch 'epoch_idx'. That is, it takes the default model trained 
+at epoch 'epoch_idx' and ablate the model at random, keeping the weights of the trained default model.
+
+The script calculates the dimensions of the collapsed model based on fibrations (using the thresholds defined) and then 
+randomly ablates the same number of nodes as the collapsed model.
+The calculation of the ablation model's dimensions is automatic, and the script returns the updated model.
+This code reproduces the results explained in STEP 5 and shown in the file './validation.pdf'
+
 Use the script 
 
     bash ./kcore_ablation.sh
 
-and set up the same parameters from the step 2:
+and set up the same parameters from STEP 2:
 
 - exp_name (str).                            Name of the model to collapse
 - epoch_idx (int).                           Epoch of training when you want to collapse
@@ -55,38 +65,34 @@ and set up the same parameters from the step 2:
  lstm_thr, critic_thr (floats 0-2)          Threshold for the fibration calculations
                                             (default = 0.7, 0.5, 1.0, 0.8)
 
-to apply ablation to the original model at epoch 'epoch_idx'.
-
-The script calcultate the dimensions of the collapsed model based on fibrations (using the thresholds defined). 
-Then, it ablates at random the same number of nodes of the collapsed model.
-The calculation of dimensions of the ablation model is automatic and the script returns the new model.
-
 The output will be saved as a Metta experiment with the name 'ablation_name':
 
     exp_name_epoch_epoch_idx_ablationsrandomlinear_thr_cnn_thr_lstm_thr_critic_thr
 
-More information about this script is inside the functions/scripts.
+More information about this script can be found inside the functions/scripts.
 
 STEP 4: TEST 2 - RUN RANDOM MODEL FROM SCRATCH
 ------------------------------
 
-Run the ablation model from scratch by randomizing all the weights and re-traning.
+This script runs the ablation model from scratch by randomly initializing all the weights and retraining. It differs from STEP 3 in that the size remains the same, but all weights are now randomized, and training proceeds from scratch.
 
-You have to define a new agent in the  './agent/src/metta/agent/component_policies/'; e.g, 'fast_small.py'.
+You have to define a new agent in the  './agent/src/metta/agent/component_policies/'; e.g, the file 'fast_small.py' contains the dimensions of the layers of the small model, which should be obtained from STEP 3.
 
-Then, you can run the training using commands of Metta:
+Then, you can run the training using the commands of Metta:
 
     ./tools/run.py experiments.recipes.arena_basic_easy_shaped.train --args run='ablation_scratch_name' --overrides policy_architecture.name='fast_small' trainer.evaluation.evaluate_interval=0 trainer.checkpoint.checkpoint_interval=10 trainer.checkpoint.wandb_checkpoint_interval=10 trainer.evaluation.replay_dir=‘exp_name’ trainer.evaluation.skip_git_check=true
 
+This code reproduces the results explained in STEP 5 and shown in the file './validation.pdf'
 
-VALIDATION RESULTS (VISUALIZE AND COMPARE RESULTS BETWEEN ORIGINAL MODEL, COLLAPSED MODEL AND ABLATION MODEL)
+STEP 5: VALIDATION RESULTS (VISUALIZE AND COMPARE RESULTS BETWEEN ORIGINAL MODEL, COLLAPSED MODEL, ABLATION, AND SMALL MODELS)
 ------------------------------
 
-Steps 3 and 4 should reproduce the results in the file './validation.pdf'.
+Steps 1 to 4  should reproduce the results in the file './validation.pdf'.
 
-1. The green curve is the original model (default) trained up to 15G agent steps (50k train_time).
+Step 1. The green curve represents the original model (default) trained up to 15G agent steps (50k training time).
 
-2. The red curve is the collapsed model via fibration to 19% (reduction of 81%) of the original size of the model. 
+Step 2. The red curve represents the collapsed model via fibration, resulting in a 19% reduction (81% reduction in size) from the original model. 
+
 We then perform the two randomization protocols. 
 
 3. Orange curve: We ablate 81% nodes at random, and keep the weights of the original 
@@ -95,7 +101,7 @@ model trained at 15G. We keep training.
 4. Purple curve: We train from scratch the small model, 19% of the original size, by initially randomizing all weights.
 
 
-Use the interface in WANDB for compare metrics and results. 
+Use the interface in WANDB to compare metrics and results. 
 
 
 FOLDER STRUCTURE EXAMPLE

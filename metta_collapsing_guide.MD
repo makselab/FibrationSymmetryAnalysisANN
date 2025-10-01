@@ -28,10 +28,10 @@ Run a second training session with the collapse mechanism enabled:
 
 Set up the next parameters:
 
--exp_name (str).                            Name of the model to collapse
--epoch_idx (int).                           Epoch of training when you want to collapse
--linear_thr, cnn_thr, 
- lstm_thr, critic_thr (floats 0-2)          Threshold for the fibration calculations
+- exp_name (str).                            Name of the model to collapse
+- epoch_idx (int).                           Epoch of training when you want to collapse
+- linear_thr, cnn_thr, 
+  lstm_thr, critic_thr (floats 0-2)          Threshold for the fibration calculations
                                             (default = 0.7, 0.5, 1.0, 0.8)
 
 This code automatically creates a collapsed version of the model and retrains it.
@@ -50,9 +50,9 @@ Run a thrid training session with the ablation mechanism enabled:
 
 Set up the next parameters:
 
--exp_name (str).                            Name of the model to collapse
--epoch_idx (int).                           Epoch of training when you want to collapse
--linear_thr, cnn_thr, 
+- exp_name (str).                            Name of the model to collapse
+- epoch_idx (int).                           Epoch of training when you want to collapse
+- linear_thr, cnn_thr, 
  lstm_thr, critic_thr (floats 0-2)          Threshold for the fibration calculations
                                             (default = 0.7, 0.5, 1.0, 0.8)
 

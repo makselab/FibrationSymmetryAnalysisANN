@@ -73,19 +73,28 @@ Use the interface in WANDB for compare metrics and results.
 FOLDER STRUCTURE EXAMPLE
 -------------------------
 train_dir/
-├── exp_name/
-│   ├── config.json
+├── exp_name/                    # Original model (1st step)
+│   ├── config.json             
 │   └── exp_name/
-│       └── checkpoints/
+│       └── checkpoints/        
 │           ├── exp_name__eXX__sSS__tTT__sc0.pt
-├── base_name/
-│   ├── ...
-│   └── ...
-├── ablation_name/
-│   ├── ...
-│   └── ...
+│           └── ...
+│
+├── base_name/                  # Collapsed model (2nd step)
+│   ├── config.json
+│   └── base_name/
+│       └── checkpoints/
+│           └── ...
+│
+├── ablation_name/              # Ablation model (3rd step)
+│   ├── config.json
+│   └── ablation_name/
+│       └── checkpoints/
+│           └── ...
+└── ...
+
 
 DISCLAIMER
 ----------
-- Choose meaningful thresholds ().
+- Choose meaningful thresholds.
 - Always verify WANDB and fiber output to validate results.

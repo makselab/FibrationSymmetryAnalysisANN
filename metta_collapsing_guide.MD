@@ -76,7 +76,7 @@ You have to define a new agent in the  './agent/src/metta/agent/component_polici
 
 Then, you can run the training using commands of Metta:
 
-    ./tools/run.py experiments.recipes.arena_basic_easy_shaped.train --args run='random_small' --overrides policy_architecture.name='fast_small' trainer.evaluation.evaluate_interval=0 trainer.checkpoint.checkpoint_interval=10 trainer.checkpoint.wandb_checkpoint_interval=10 trainer.evaluation.replay_dir=‘exp_name’ trainer.evaluation.skip_git_check=true
+    ./tools/run.py experiments.recipes.arena_basic_easy_shaped.train --args run='ablation_scratch_name' --overrides policy_architecture.name='fast_small' trainer.evaluation.evaluate_interval=0 trainer.checkpoint.checkpoint_interval=10 trainer.checkpoint.wandb_checkpoint_interval=10 trainer.evaluation.replay_dir=‘exp_name’ trainer.evaluation.skip_git_check=true
 
 
 VALIDATION RESULTS (VISUALIZE AND COMPARE RESULTS BETWEEN ORIGINAL MODEL, COLLAPSED MODEL AND ABLATION MODEL)

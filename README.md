@@ -19,5 +19,5 @@ This enables more efficient training and inference by leveraging symmetries in t
 In order to use the code for fibration collapsed results, follow the instructions in the file: [Model Collapsing Guide](model_collapsing_guide.MD)
 
 
-The full documentation of the underlying enviorements is hosted at [puffer.ai](https://huggingface.co/metta-ai/baseline.v0.1.0").  For support -- post here before opening issues.
+The full documentation of the underlying enviorements is hosted at [Metta](https://huggingface.co/metta-ai/baseline.v0.1.0").  For support -- post here before opening issues.
 

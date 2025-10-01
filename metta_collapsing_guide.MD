@@ -64,26 +64,16 @@ The output will be saved as a Metta experiment with the name 'ablation_name':
 
 More information about this script is inside the functions/scripts.
 
-STEP 4: TEST 2 - RUN RANDOM MODEL FROM SCRATCH AND RE-TRAINING
+STEP 4: TEST 2 - RUN RANDOM MODEL FROM SCRATCH
 ------------------------------
 
 Once you obtain the collapsed model, you will know its dimensions. 
-You can define a new agent in the  ./agent/src/metta/agent/component_policies/
+You can define a new agent in the  './agent/src/metta/agent/component_policies/'; e.g, 'fast_small.py'.
 
-fast_small.py
+Then, you can run the training using commands of Metta:
 
-fast_small.py
+    ./tools/run.py experiments.recipes.arena_basic_easy_shaped.train --args run='random_small' --overrides policy_architecture.name='fast_small' trainer.evaluation.evaluate_interval=0 trainer.checkpoint.checkpoint_interval=10 trainer.checkpoint.wandb_checkpoint_interval=10 trainer.evaluation.replay_dir=‘exp_name’ trainer.evaluation.skip_git_check=true
 
-<!-- Run the original training using commands of Metta. For example,
-
-    ./tools/run.py experiments.recipes.arena_basic_easy_shaped.train --args run='exp_name' --overrides policy_architecture.name='ablation_fast' trainer.evaluation.evaluate_interval=0 trainer.checkpoint.checkpoint_interval=10 trainer.checkpoint.wandb_checkpoint_interval=10 trainer.evaluation.replay_dir=‘exp_name’ trainer.evaluation.skip_git_check=true
-
-This command:
-- Trains the agent in the "arena_basic_easy_shaped" environment
-- Stores model checkpoints under a subdirectory in `train_dir/exp_name` (checkpoint_interval = 10)
-- Stores metrics in WANDB under the name `exp_name` (wandb_checkpoint_interval = 10)
-
- -->
 
 VALIDATION RESULTS (VISUALIZE AND COMPARE RESULTS BETWEEN ORIGINAL MODEL, COLLAPSED MODEL AND ABLATION MODEL)
 ------------------------------

@@ -6,6 +6,7 @@ built into Metta agents to compress neural network layers and compare performanc
 before and after compression. You'll run three training sessions and visualize 
 the effects of collapsing based on fibration symmetries.
 
+
 STEP 1: RUN BASELINE TRAINING
 -----------------------------
 Run the original training using commands of Metta. For example,
@@ -40,14 +41,14 @@ The output will be saved as a Metta experiment with the name 'base_name':
 
 More information about this script is inside the functions/scripts.
 
-STEP 3: TEST 1 - RUN RANDOM ABLATION AND RE-TRAINING
+STEP 3: RUN ABLATION AND RE-TRAINING
 ------------------------------
 
-Use the script 
+Run a thrid training session with the ablation mechanism enabled:
 
     bash ./kcore_ablation.sh
 
-and parameters:
+Set up the next parameters:
 
 - exp_name (str).                            Name of the model to collapse
 - epoch_idx (int).                           Epoch of training when you want to collapse
@@ -55,8 +56,7 @@ and parameters:
  lstm_thr, critic_thr (floats 0-2)          Threshold for the fibration calculations
                                             (default = 0.7, 0.5, 1.0, 0.8)
 
-to apply ablation to the original model at epoch 'epoch_idx'.
-
+This code automatically applies ablation to the model and retrains it.
 This new model has the same number of nodes of the collapsed model (using the thresholds defined).
 The output will be saved as a Metta experiment with the name 'ablation_name':
 
@@ -64,43 +64,9 @@ The output will be saved as a Metta experiment with the name 'ablation_name':
 
 More information about this script is inside the functions/scripts.
 
-STEP 4: TEST 2 - RUN RANDOM MODEL FROM SCRATCH AND RE-TRAINING
-------------------------------
 
-Once you obtain the collapsed model, you will know its dimensions. 
-You can define a new agent in the  ./agent/src/metta/agent/component_policies/
-
-fast_small.py
-
-fast_small.py
-
-<!-- Run the original training using commands of Metta. For example,
-
-    ./tools/run.py experiments.recipes.arena_basic_easy_shaped.train --args run='exp_name' --overrides policy_architecture.name='ablation_fast' trainer.evaluation.evaluate_interval=0 trainer.checkpoint.checkpoint_interval=10 trainer.checkpoint.wandb_checkpoint_interval=10 trainer.evaluation.replay_dir=‘exp_name’ trainer.evaluation.skip_git_check=true
-
-This command:
-- Trains the agent in the "arena_basic_easy_shaped" environment
-- Stores model checkpoints under a subdirectory in `train_dir/exp_name` (checkpoint_interval = 10)
-- Stores metrics in WANDB under the name `exp_name` (wandb_checkpoint_interval = 10)
-
- -->
-
-VALIDATION RESULTS (VISUALIZE AND COMPARE RESULTS BETWEEN ORIGINAL MODEL, COLLAPSED MODEL AND ABLATION MODEL)
-------------------------------
-
-Steps 3 and 4 should reproduce the results in the file './validation.pdf'.
-
-1. The green curve is the original model (default) trained up to 15G agent steps (50k train_time).
-
-2. The red curve is the collapsed model via fibration to 19% (reduction of 81%) of the original size of the model. 
-We then perform the two randomization protocols. 
-
-3. Orange curve: We ablate 81% nodes at random, and keep the weights of the original 
-model trained at 15G. We keep training. 
-
-4. Purple curve: We train from scratch the small model, 19% of the original size, by initially randomizing all weights.
-
-
+STEP 4: VISUALIZE AND COMPARE RESULTS BETWEEN ORIGINAL MODEL, COLLAPSED MODEL AND ABLATION MODEL
+-------------------------------------
 Use the interface in WANDB for compare metrics and results. 
 
 
@@ -127,7 +93,7 @@ FOLDER STRUCTURE EXAMPLE
     │       └── checkpoints/
     │           └── ...
     └── ...
-
+    
 
 DISCLAIMER
 ----------

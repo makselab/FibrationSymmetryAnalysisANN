@@ -51,7 +51,7 @@ at epoch 'epoch_idx' and ablate the model at random, keeping the weights of the 
 The script calculates the dimensions of the collapsed model based on fibrations (using the thresholds defined) and then 
 randomly ablates the same number of nodes as the collapsed model.
 The calculation of the ablation model's dimensions is automatic, and the script returns the updated model.
-This code reproduces the results explained in STEP 5 and shown in the file './validation.pdf' [validation.pdf] (validation.pdf)
+This code reproduces the results explained in STEP 5 and shown in the file './validation.pdf' [pdf file](validation.pdf)
 Use the script 
 
     bash ./kcore_ablation.sh

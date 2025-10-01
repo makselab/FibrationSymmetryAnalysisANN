@@ -15,6 +15,7 @@ lstm_thr=1.0
 critic_thr=0.8
 
 # ===========================================================
+
 # Set up - Paths/Folders/Files
 checkpoints_folder=$PATHtrain$exp_name'/'$exp_name'/checkpoints/'
 model_checkpoint=$(find "$checkpoints_folder" -name "${exp_name}__e${epoch_idx}__s*__t*__sc0.pt" | head -n 1)
@@ -28,7 +29,7 @@ trainer_state=$checkpoints_folder'trainer_state.pt'
 
 # ===========================================================
 
-#Collapse Model
+# Ablation Model
 
 ./kcore/ablation_model.py -path $PATHtrain\
 						  -exp $exp_name\

@@ -44,14 +44,14 @@ inputs_net = {'td':{'env_obs':torch.randn(1, 3, 24, 200)},
 # --------------------------------------------------------
 
 # # If you want to check, the colors:
-reduction_colors_model = {
-    'policy_components_cnn1__net_0':[], 
-    'policy_components_cnn2__net_0':[], 
-    'policy_components_fc1__net_0':[], 
-    'policy_components_encoded_obs__net_0':[],
-    'policy_components__core___net':[], 
-    'policy_components_critic_1__net_0':[], 
-    'policy_components_actor_1__net_0':[]}
+# reduction_colors_model = {
+#     'policy_components_cnn1__net_0':[], 
+#     'policy_components_cnn2__net_0':[], 
+#     'policy_components_fc1__net_0':[], 
+#     'policy_components_encoded_obs__net_0':[],
+#     'policy_components__core___net':[], 
+#     'policy_components_critic_1__net_0':[], 
+#     'policy_components_actor_1__net_0':[]}
 
 # --------------------------------------------------------
 

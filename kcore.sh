@@ -9,10 +9,10 @@ exp_name='osva_sept_8_final'
 epoch_idx=15730
 #3160
 
-linear_thr=0.6
-cnn_thr=0.0
-lstm_thr=0.0
-critic_thr=0.6
+linear_thr=0.7
+cnn_thr=0.5
+lstm_thr=1.0
+critic_thr=0.8
 
 # ===========================================================
 

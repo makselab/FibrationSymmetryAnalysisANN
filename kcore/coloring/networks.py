@@ -49,7 +49,9 @@ class ColorPropagator:
         
         Args:
             dict_input_tensors: Dictionary mapping input names to tensor values
-            threshold: Threshold value for fibration calculations
+            threshold: Threshold value for fibration calculations. Range (0-2).
+                        0: 
+                        2: Full collapse
             origin_node: The starting node in the graph for color propagation
             
         Returns:

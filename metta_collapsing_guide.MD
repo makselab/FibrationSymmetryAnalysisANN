@@ -52,6 +52,7 @@ The script calculates the dimensions of the collapsed model based on fibrations 
 randomly ablates the same number of nodes as the collapsed model.
 The calculation of the ablation model's dimensions is automatic, and the script returns the updated model.
 This code reproduces the results explained in STEP 5 and shown in the file './validation.pdf' [pdf file](validation.pdf)
+
 Use the script 
 
     bash ./kcore_ablation.sh

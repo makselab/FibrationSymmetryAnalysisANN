@@ -1,0 +1,20 @@
+# This host is protected by oauth2-proxy.
+# API will be mounted under /api.
+#
+# See also: observatory-backend chart, which mounts API on api.observatory.softmax-research.net without oauth2-proxy.
+host: observatory.softmax-research.net
+
+image:
+  registry: 751442549699.dkr.ecr.us-east-1.amazonaws.com
+  name: metta-app-frontend
+  tag: "" # will be set by CI/CD pipeline
+
+cert_manager_issuer: letsencrypt
+
+oauth2_proxy:
+  email_domains:
+    - stem.ai
+    - softmax.com
+
+  # This secret is terraformed by devops/tf/eks
+  secret_name: softmax-infra-oauth

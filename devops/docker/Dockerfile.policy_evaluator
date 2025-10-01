@@ -1,0 +1,22 @@
+FROM ubuntu:22.04
+
+ARG TARGETPLATFORM
+ARG TARGETARCH
+ARG BUILDPLATFORM
+
+WORKDIR /workspace
+
+COPY . /workspace/metta
+
+WORKDIR /workspace/metta
+
+RUN bash ./devops/tools/install-system.sh
+
+RUN bash install.sh --profile=softmax-docker --non-interactive
+
+# Pre-build all packages to avoid OOM during container startup
+RUN uv sync --all-extras --frozen && \
+    uv run python -c "import metta.app_backend.eval_task_orchestrator" && \
+    uv run python -c "import metta.app_backend.eval_task_worker"
+
+CMD ["/bin/bash"]

@@ -92,16 +92,16 @@ STEP 5: VALIDATION RESULTS (VISUALIZE AND COMPARE RESULTS BETWEEN ORIGINAL MODEL
 
 Steps 1 to 4  should reproduce the results in the file './validation.pdf' [pdf file](validation.pdf).
 
-Step 1. The green curve represents the original model (default) trained up to 15G agent steps (50k training time).
+STEP 1. The green curve represents the original model (default) trained up to 15G agent steps (50k training time).
 
-Step 2. The red curve represents the collapsed model via fibration, resulting in a 19% reduction (81% reduction in size) from the original model. 
+STEP 2. The red curve represents the collapsed model via fibration, resulting in a 19% reduction (81% reduction in size) from the original model. 
 
 We then perform the two randomization protocols. 
 
-3. Orange curve: We ablate 81% nodes at random, and keep the weights of the original 
+STEP 3. Orange curve: We ablate 81% nodes at random, and keep the weights of the original 
 model trained at 15G. We keep training. 
 
-4. Purple curve: We train from scratch the small model, 19% of the original size, by initially randomizing all weights.
+STEP 4. Purple curve: We train from scratch the small model, 19% of the original size, by initially randomizing all weights.
 
 
 Use the interface in WANDB to compare metrics and results. 

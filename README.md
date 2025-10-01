@@ -1,10 +1,10 @@
-# Fibration Symmetry for RL (Forked & Modified from PufferAI)
+# Fibration Symmetry for RL (Forked & Modified from Metta)
 
 This is a **fork** of the original [Metta repository](https://github.com/Metta-AI/metta), with custom modifications.
 
 ## 🔧 Purpose of the Fork
 
-The goal of this fork is to **extend the functionality** of PufferAI in order to:
+The goal of this fork is to **extend the functionality** of Metta in order to:
 
 > **Enable collapsing of the policy network for certain enviorements using fibration symmetries.**
 

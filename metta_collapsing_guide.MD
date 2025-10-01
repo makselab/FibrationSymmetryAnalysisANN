@@ -1,9 +1,9 @@
 FIBRATION SYMMETRIES IN METTA AGENTS: STEP-BY-STEP GUIDE
 =================================================
 
-This guide walks through how to use the fibration-based model collapsing features 
+This guide explains how to use the fibration-based model collapsing features 
 built into Metta agents to compress neural network layers and compare performance 
-before and after compression. You'll run three training sessions and visualize 
+before and after compression. You'll run training sessions and visualize 
 the effects of collapsing based on fibration symmetries.
 
 STEP 1: RUN BASELINE TRAINING

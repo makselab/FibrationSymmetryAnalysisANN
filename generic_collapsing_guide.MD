@@ -15,7 +15,7 @@ Then, initializate the object 'propagator'
 
     propagator= ColorPropagator(model)
 
-1. RUN COLORING
+1- RUN COLORING
 -----------------------------
 
 Use the method '.coloring' to obtain the colors:
@@ -31,7 +31,7 @@ where
 - inputs_net: Random tensor with the same dimensions of the inputs.
 - threshold: Thresholds for the fibration calculation.
 
-2. RUN COLLAPSE
+2- RUN COLLAPSE
 -----------------------------
     base_model = propagator.collapse_model()
     num_params_base = sum(p.numel() for p in base_model.parameters())

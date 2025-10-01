@@ -2,97 +2,61 @@ MODEL COLLAPSING AND SYMMETRY BREAKING IN PUFFERLIB AGENTS: STEP-BY-STEP GUIDE
 =================================================
 
 This guide walks through how to use the fibration-based model collapsing features 
-built into PufferLib agents to compress neural network layers and compare performance 
+built into Metta agents to compress neural network layers and compare performance 
 before and after compression. You'll run two training sessions and visualize 
-the effects of collapsing using fibrations. The underlying architectures are typically composed of CCNs, LSTMs, and linear layers
+the effects of collapsing using fibrations.
 
 
 STEP 1: RUN BASELINE TRAINING
 -----------------------------
-Run the original training using:
+Run the original training using commands of Metta. For example,
 
-    python demo.py --mode train --vec multiprocessing --env beam_rider > log.out 2> log.err
+    ./tools/run.py experiments.recipes.arena_basic_easy_shaped.train --args run='exp_name' --overrides policy_architecture.name='fast' trainer.evaluation.evaluate_interval=0 trainer.checkpoint.checkpoint_interval=10 trainer.checkpoint.wandb_checkpoint_interval=10 trainer.evaluation.replay_dir=‘exp_name’ trainer.evaluation.skip_git_check=true
 
 This command:
-- Trains the agent in the "beam_rider" Atari environment
-- Saves stdout logs to `log.out`
-- Saves error logs to `log.err`
-- Stores model checkpoints under a subdirectory in `experiments/`
+- Trains the agent in the "arena_basic_easy_shaped" environment
+- Stores model checkpoints under a subdirectory in `train_dir/exp_name` (checkpoint_interval = 10)
+- Stores metrics in WANDB under the name `exp_name` (wandb_checkpoint_interval = 10)
 
 
 STEP 2: RUN COLLAPSED TRAINING
 ------------------------------
+
 Run a second training session with the collapse mechanism enabled:
 
-    python demo.py --mode train --vec multiprocessing --env beam_rider --collapse 0.3 > log_collapsed.out 2> log_collapsed.err
+    bash ./kcore.sh
 
-The new input argument `--collapse` (a value between 0 and 2, e.g., 0.3) 
-activates the fiber collapsing pipeline.
+Set up the next parameters:
 
-This does two things:
+-exp_name (str).                            Name of the model to collapse
+-epoch_idx (int).                           Epoch of training when you want to collapse
+-linear_thr, cnn_thr, 
+ lstm_thr, critic_thr (floats 0-2)          Threshold for the fibration calculations
 
-1. Collapse the model:
-   - Tries to load `model_000050.pt` from the experiment directory.
-   - If not found, it finds the closest available checkpoint (e.g., `model_000051.pt`).
-   - It compresses the model by applying fiber clustering to:
-     * Linear layer
-     * LSTM layer
-   - The collapsed model and fiber info are saved under:
-     
-         experiments/<experiment-folder>/collapsed_model_thr_<THRESHOLDx10>_<EPISODE>/
+This code automatically creates a collapsed version of the model and retrains it.
+The output will be saved as a Metta experiment with the name 'base_name':
 
-     For example:
+    exp_name_epoch_epoch_idx_base_linear_thr_cnn_thr_lstm_thr_critic_thr
 
-         experiments/beam_rider-e3d19a76/collapsed_model_thr_03_000051/
-
-     This directory contains:
-     - model_000051_collapsed.pt
-     - fibers.pkl
-
-2. Resume training from the collapsed model:
-   - Continues training up to episode 300
-   - Stores the new training run in a generated subfolder within the collapse directory
-
+More information about this script is inside the functions/scripts.
 
 STEP 3: VISUALIZE AND COMPARE RESULTS
 -------------------------------------
-Use the provided notebook:
-
-    Collapsing_step_by_step_guide.ipynb
-
-This notebook:
-- Parses `log.out` and `log_collapsed.out` for episode return data
-- Loads `fibers.pkl` to track clustering reductions
-- Generates a plot comparing original vs collapsed training performance
-  and shows fiber cluster reduction over time
-
-
-LOG FILES SUMMARY
------------------
-- `log.out`                  → Original training output
-- `log.err`                 → Original training errors
-- `log_collapsed.out`       → Collapsed model training output
-- `log_collapsed.err`       → Errors from collapsed training session
+Use the interface in WANDB for compare metrics and results. 
 
 
 FOLDER STRUCTURE EXAMPLE
 -------------------------
-experiments/
-├── beam_rider-e3d19a76/
-│   ├── model_000050.pt
-│   ├── log.out
-│   └── collapsed_model_thr_03_000051/
-│       ├── model_000051_collapsed.pt
-│       ├── fibers.pkl
-│       └── beam_rider-<run_id>/
-│           ├── model_000300.pt
-│           └── log_collapsed.out
+train_dir/
+├── exp_name/
+│   ├── config.json
+│   └── exp/
+│       └── checkpoints/
+│           ├── exp_name__eXX__sSS__tTT__sc0.pt
 
-The final results should be something like: 
-![Collapse Diagram](https://github.com/makselab/PufferLib_kcore/blob/2.0/Collapse.png?raw=true)
 
 DISCLAIMER
 ----------
 - The --collapse feature must be implemented in your local fork of PufferLib.
-- Choose meaningful thresholds (e.g., 0.2, 0.5, 1.0).
-- Always verify logs and fiber output to validate results.
+- Choose meaningful thresholds.
+- Always verify WANDB and fiber output to validate results.

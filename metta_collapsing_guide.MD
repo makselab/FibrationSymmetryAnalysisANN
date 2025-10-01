@@ -46,7 +46,7 @@ STEP 3: TEST 1 - RUN RANDOM ABLATION MODEL AND RE-TRAINING
 ------------------------------
 
 This script applies a random ablation to the original default model trained at epoch 'epoch_idx'. That is, it takes the default model trained 
-at epoch 'epoch_idx' and ablate the model at random to the size of the collapse model, while keeping the weights of the trained default model.
+at epoch 'epoch_idx' and ablates the model at random to the size of the collapse model, while keeping the weights of the trained default model.
 
 The script calculates the dimensions of the collapsed model based on fibrations (using the thresholds defined) and then 
 randomly ablates to the size of the collapsed model.

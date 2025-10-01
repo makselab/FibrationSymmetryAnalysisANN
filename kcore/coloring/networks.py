@@ -7,7 +7,6 @@ from torch.fx.immutable_collections import immutable_list
 from coloring.nn_modules import fibration_for_nn_module
 from coloring.functions_methods import fibration_for_function
 from coloring.collapse_nn import collapse_nn_module
-from coloring.breaking_nn import breaking_nn_module
 
 # ------------------------------------------------------------------------
 # Color Graph Propagation Runner
@@ -235,48 +234,6 @@ class ColorPropagator:
                 setattr(parent_module, path_components[-1], collapsed_module)
 
         return base_model
-
-    # def breaking_symmetry(self):
-    #     """
-    #     Create a model with broken symmetries based on color analysis.
-        
-    #     Similar to collapse_model but applies symmetry breaking transformations
-    #     instead of collapsing.
-        
-    #     Returns:
-    #         A new model instance with symmetry breaking applied to appropriate modules
-    #     """
-    #     # Applies symmetry breaking transformations to modules
-    #     # Uses the same preservation rules as collapse_model
-
-    #     base_model = copy.deepcopy(self.model)
-
-    #     named_modules = dict(base_model.named_modules())
-
-    #     for node in self.traced.graph.nodes:
-    #         if node.op == 'call_module': 
-
-    #             node_target = node.target
-
-    #             collapse_out = True
-    #             if 'actor' in node_target or 'value_fn' in node_target or 'cnn2' in node_target:
-    #                 collapse_out = False 
-
-    #             collapse_in = True
-
-    #             original_module = named_modules[node_target]
-    #             collapsed_module = breaking_nn_module(original_module, collapse_in=collapse_in, collapse_out=collapse_out)
-
-    #             path_components = node.target.split('.')
-    #             parent_module = base_model
-
-    #             for component in path_components[:-1]:
-    #                 parent_module = getattr(parent_module, component)
-
-    #             setattr(parent_module, path_components[-1], collapsed_module)
-
-    #     return base_model
-
 
     def _get_attr(self, module, target):
         """

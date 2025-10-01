@@ -15,6 +15,7 @@ lstm_thr=0.0
 critic_thr=0.6
 
 # ===========================================================
+
 # Set up - Paths/Folders/Files
 checkpoints_folder=$PATHtrain$exp_name'/'$exp_name'/checkpoints/'
 model_checkpoint=$(find "$checkpoints_folder" -name "${exp_name}__e${epoch_idx}__s*__t*__sc0.pt" | head -n 1)
@@ -28,7 +29,7 @@ trainer_state=$checkpoints_folder'trainer_state.pt'
 
 # ===========================================================
 
-#Collapse Model
+# Collapse Model (Arguments explained inside of the script)
 
 ./kcore/collapse_model.py -path $PATHtrain\
 						  -exp $exp_name\
@@ -41,7 +42,7 @@ trainer_state=$checkpoints_folder'trainer_state.pt'
 
 # ===========================================================
 
-# Optimizer
+# Optimizer: Adapting the optimizer dimension to the new model dimension
 
 base_name=$exp_name'_epoch_'$epoch_idx'_base_'$linear_thr'_'$cnn_thr'_'$lstm_thr'_'$critic_thr
 base_folder=$PATHtrain$base_name'/'$base_name'/checkpoints/'
@@ -56,7 +57,7 @@ optimizer_path=$base_folder'trainer_state.pt'
 
 # ===========================================================
 
-# RunTraining
+# Run Training of Collapse Model (base_name)
 
 ./tools/run.py experiments.recipes.arena_basic_easy_shaped.train\
 			--args run="${base_name}"\

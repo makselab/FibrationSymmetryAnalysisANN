@@ -14,7 +14,7 @@ from kcore.coloring.networks import ColorPropagator
 parser = argparse.ArgumentParser(
     description='Collapse Model',
     formatter_class=argparse.RawDescriptionHelpFormatter,
-    epilog=''' Example: collapse_model.py -m model_path -f archivo.txt''')
+    epilog=''' Example: collapse_model.py -path train_path -exp aexp_name ... ''')
 
 parser.add_argument('-path', '--PATH', type=str, dest='path', help='Training path')
 parser.add_argument('-exp' , '--exp_name', type=str, dest='exp_name', help='ExpName')

@@ -39,7 +39,7 @@ class Fast(ComponentPolicy):
             ),
             "cnn1": Conv2d(
                 name="cnn1",
-                nn_params=DictConfig({"out_channels": 12, "kernel_size": 5, "stride": 3, "padding": 0}),
+                nn_params=DictConfig({"out_channels": 14, "kernel_size": 5, "stride": 3, "padding": 0}),
                 sources=[{"name": "obs_normalizer"}],
                 **self.agent_attributes,
             ),
@@ -55,24 +55,24 @@ class Fast(ComponentPolicy):
             ),
             "fc1": Linear(
                 name="fc1",
-                nn_params=DictConfig({"out_features": 24}),
+                nn_params=DictConfig({"out_features": 27}),
                 sources=[{"name": "obs_flattener"}],
                 **self.agent_attributes,
             ),
             "encoded_obs": Linear(
                 name="encoded_obs",
-                nn_params=DictConfig({"out_features": 24}),
+                nn_params=DictConfig({"out_features": 27}),
                 sources=[{"name": "fc1"}],
                 **self.agent_attributes,
             ),
             "_core_": LSTM(
                 name="_core_",
-                nn_params=DictConfig({"hidden_size": 24, "num_layers": 2}),
+                nn_params=DictConfig({"hidden_size": 21, "num_layers": 2}),
                 sources=[{"name": "encoded_obs"}],
             ),
             "critic_1": Linear(
                 name="critic_1",
-                nn_params=DictConfig({"out_features": 196}),
+                nn_params=DictConfig({"out_features": 190}),
                 sources=[{"name": "_core_"}],
                 nonlinearity="nn.Tanh",
                 effective_rank=True,

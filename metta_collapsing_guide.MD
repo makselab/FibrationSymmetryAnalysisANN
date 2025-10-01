@@ -57,7 +57,10 @@ and set up the same parameters from the step 2:
 
 to apply ablation to the original model at epoch 'epoch_idx'.
 
-This new model has the same number of nodes of the collapsed model (using the thresholds defined).
+The script calcultate the dimensions of the collapsed model based on fibrations (using the thresholds defined). 
+Then, it ablates at random the same number of nodes of the collapsed model.
+The calculation of dimensions of the ablation model is automatic and the script returns the new model.
+
 The output will be saved as a Metta experiment with the name 'ablation_name':
 
     exp_name_epoch_epoch_idx_ablationsrandomlinear_thr_cnn_thr_lstm_thr_critic_thr
@@ -67,8 +70,9 @@ More information about this script is inside the functions/scripts.
 STEP 4: TEST 2 - RUN RANDOM MODEL FROM SCRATCH
 ------------------------------
 
-Once you obtain the collapsed model, you will know its dimensions. 
-You can define a new agent in the  './agent/src/metta/agent/component_policies/'; e.g, 'fast_small.py'.
+Run the ablation model from scratch by randomizing all the weights and re-traning.
+
+You have to define a new agent in the  './agent/src/metta/agent/component_policies/'; e.g, 'fast_small.py'.
 
 Then, you can run the training using commands of Metta:
 

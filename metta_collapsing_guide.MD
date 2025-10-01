@@ -46,10 +46,11 @@ STEP 3: TEST 1 - RUN RANDOM ABLATION AND RE-TRAINING
 ------------------------------
 
 This script applies a random ablation to the original default model trained at epoch 'epoch_idx'. That is, it takes the default model trained 
-at epoch 'epoch_idx' and ablate the model at random, keeping the weights of the trained default model.
+at epoch 'epoch_idx' and ablate the model at random to the size of the collapse model, while keeping the weights of the trained default model.
 
 The script calculates the dimensions of the collapsed model based on fibrations (using the thresholds defined) and then 
-randomly ablates the same number of nodes as the collapsed model.
+randomly ablates to the size of the collapsed model.
+
 The calculation of the ablation model's dimensions is automatic, and the script returns the updated model.
 This code reproduces the results explained in STEP 5 and shown in the file './validation.pdf' [pdf file](validation.pdf)
 
@@ -71,18 +72,18 @@ The output will be saved as a Metta experiment with the name 'ablation_name':
 
 More information about this script can be found inside the functions/scripts.
 
-STEP 4: TEST 2 - RUN RANDOM MODEL FROM SCRATCH
+STEP 4: TEST 2 - RUN SMALL RANDOM MODEL FROM SCRATCH
 ------------------------------
 
 This script runs the ablation model from scratch by randomly initializing all the weights and retraining. It differs from STEP 3 in that the size remains the same, but all weights are now randomized, and training proceeds from scratch.
 
-You have to define a new agent in the  './agent/src/metta/agent/component_policies/'; e.g, the file 'fast_small.py' contains the dimensions of the layers of the small model, which should be obtained from STEP 3.
+You have to define a new agent in the  './agent/src/metta/agent/component_policies/'; e.g, the file 'fast_small.py' contains the dimensions of the layers of the small random model. The dimensions should be obtained from the ablation model in STEP 3.
 
 Then, you can run the training using the commands of Metta:
 
     ./tools/run.py experiments.recipes.arena_basic_easy_shaped.train --args run='ablation_scratch_name' --overrides policy_architecture.name='fast_small' trainer.evaluation.evaluate_interval=0 trainer.checkpoint.checkpoint_interval=10 trainer.checkpoint.wandb_checkpoint_interval=10 trainer.evaluation.replay_dir=‘exp_name’ trainer.evaluation.skip_git_check=true
 
-This code reproduces the results explained in STEP 5 and shown in the file './validation.pdf'
+This code reproduces the results explained in STEP 5 and shown in the file './validation.pdf' [pdf file](validation.pdf)
 
 STEP 5: VALIDATION RESULTS (VISUALIZE AND COMPARE RESULTS BETWEEN ORIGINAL MODEL, COLLAPSED MODEL, ABLATION, AND SMALL MODELS)
 ------------------------------

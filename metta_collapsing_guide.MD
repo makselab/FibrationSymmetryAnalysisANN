@@ -47,7 +47,7 @@ Use the script
 
     bash ./kcore_ablation.sh
 
-and parameters:
+and set up the same parameters from the step 2:
 
 - exp_name (str).                            Name of the model to collapse
 - epoch_idx (int).                           Epoch of training when you want to collapse
